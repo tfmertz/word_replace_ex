@@ -43,6 +43,61 @@
             $this->assertEquals('b b', $result);
         }
 
+        /*
+        input: "cat", "cat", "dog"
+        output: "dog"
+
+        Spec: Replace a letter in a multiple lettered word with another letter
+        */
+        function test_findTarget_word()
+        {
+            $test_FindReplace = new FindReplace;
+            $input1 = 'cat';
+            $input2 = 'cat';
+            $input3 = 'dog';
+
+            $result = $test_FindReplace->replaceTarget($input1, $input2, $input3);
+
+            $this->assertEquals('dog', $result);
+        }
+
+        /*
+        input: "The cat is in the hat", "cat", "dog"
+        output: "The dog is in the hat"
+
+        Spec: Replace a letter in a multiple lettered word with another letter
+        */
+        function test_findTarget_multipleWords()
+        {
+            $test_FindReplace = new FindReplace;
+            $input1 = 'The cat is in the hat';
+            $input2 = 'cat';
+            $input3 = 'dog';
+
+            $result = $test_FindReplace->replaceTarget($input1, $input2, $input3);
+
+            $this->assertEquals('The dog is in the hat', $result);
+        }
+
+
+        /*
+        input: "The cat is in the hat", "a", "o"
+        output: "The cot is in the hot"
+
+        Spec: swap all instances of a target with the instances of the replacement
+        */
+        function test_findTarget_partialWord()
+        {
+            $test_FindReplace = new FindReplace;
+            $input1 = "The cat is in the hat";
+            $input2 = "a";
+            $input3 = "o";
+
+            $result = $test_FindReplace->replaceTarget($input1, $input2, $input3);
+
+            $this->assertEquals("The cot is in the hot", $result);
+        }
+
     }
 
 
