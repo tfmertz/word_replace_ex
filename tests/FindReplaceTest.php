@@ -98,6 +98,52 @@
             $this->assertEquals("The cot is in the hot", $result);
         }
 
+        /*
+        input: "The cat is in the hat", "CAt", "dog"
+        output: "The dog is in the hat"
+        Spec: swap all instances of a target with the instances of the replacement when case is inconsistent
+        */
+        function test_findTarget_partialWordCaseInsensitive()
+        {
+            $test_FindReplace = new FindReplace;
+            $input1 = "The cat is in the hat";
+            $input2 = "CAt";
+            $input3 = "dog";
+
+            $result = $test_FindReplace->replaceTarget($input1, $input2, $input3);
+
+            $this->assertEquals("The dog is in the hat", $result);
+        }
+
+        /*
+        input: "The cat is in ThE hat", "cat", "dog"
+        output: "The dog is in ThE hat"
+        Spec: swap all instances of a target with the instances of the replacement
+        when case is inconsistent and save previous capitalizations
+        */
+        function test_findTarget_partialWordCaseInsensitiveIgnore()
+        {
+            $test_FindReplace = new FindReplace;
+            $input1 = "The cat is in ThE hat";
+            $input2 = "cat";
+            $input3 = "dog";
+
+            $result = $test_FindReplace->replaceTarget($input1, $input2, $input3);
+
+            $this->assertEquals("The dog is in ThE hat", $result);
+        }
+
+        function test_findTarget_partialWordCaseInsensitiveIgnoreXCS()
+        {
+            $test_FindReplace = new FindReplace;
+            $input1 = "I am walking my CaT to the catheDRal";
+            $input2 = "cat";
+            $input3 = "do";
+
+            $result = $test_FindReplace->replaceTarget($input1, $input2, $input3);
+
+            $this->assertEquals("I am walking my do to the doheDRal", $result);
+        }
     }
 
 
